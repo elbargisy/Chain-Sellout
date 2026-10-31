@@ -31,7 +31,7 @@ iframe.on{display:block}
 </head>
 <body>
 <header>
-  <div class="brand"><b>Jamjoom Pharma · Ophthalmology</b><span>Western Region sales portal</span></div>
+  <div class="brand"><b>Jamjoom Pharma · Ophthalmology</b><span id="sub">JP Ophtha Sales</span></div>
   <nav role="tablist" aria-label="Dashboards">
     <button role="tab" id="t-sales" data-tab="sales" aria-selected="true">JP Ophtha Sales</button>
     <button role="tab" id="t-chain" data-tab="chain" aria-selected="false">Chain Sell-Out</button>
@@ -47,7 +47,7 @@ iframe.on{display:block}
 const tabs=[...document.querySelectorAll('nav button')];
 function show(name){
   if(!document.getElementById('f-'+name)) name='sales';
-  tabs.forEach(b=>b.setAttribute('aria-selected',b.dataset.tab===name));
+  tabs.forEach(b=>{const on=b.dataset.tab===name;b.setAttribute('aria-selected',on);if(on)document.getElementById('sub').textContent=b.textContent;});
   document.querySelectorAll('iframe').forEach(f=>{
     const on=f.id==='f-'+name;
     if(on&&!f.src) f.src=f.dataset.src; // load each dashboard the first time its tab opens
